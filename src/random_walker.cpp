@@ -1,16 +1,23 @@
 #include <raylib.h>
+#include <raymath.h>
+#include <rlgl.h>
 
 class Walker{
 
 private:
         int x,y;
+        const int width = 600;
+        const int height = 800;
 
 public:
-    i  void NewGame() {
-            Walker(int width, int height)
-            x = width / 2;
-            y = height / 2;
-            }
+        void Newgame() {
+            x = width/2;
+            y = height/2;
+        }
+
+        Walker(int width,int height){
+            x = width/2;
+            y = height/2;
         }
 
         void render(){
@@ -34,9 +41,15 @@ public:
             }
         }
 
-        if IsMouseButtonPressed(KEY_R) {
-            NewGame();
+        void keycheck(){
+            if(IsKeyPressed(KEY_R)) {
+            Newgame();
+            render();
+            step();
+            }
         }
+        
+};
 
 
 int main(void){
@@ -46,6 +59,8 @@ int main(void){
     SetTargetFPS(60);
     
     Walker w(width,height);
+
+    w.keycheck();
     
     int i = 1;
     while(!WindowShouldClose()){
@@ -58,9 +73,5 @@ int main(void){
     CloseWindow();
     return 0;
 
-
+   
 }
-
-
-
-
